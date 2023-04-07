@@ -6,21 +6,31 @@
 
 
 #1) Login as Admin to the AWS Account in which the setup will be done.
-#2) Open Cloud9 and git clone <public repo>
-This is how the structure should look like - 
->>Admin:~/environment/temp_zip_contents/s3data $ ls -la
-total 8
-drwxr-xr-x 7 ec2-user ec2-user  156 Mar 18 13:45 .
-drwxrwxr-x 4 ec2-user ec2-user   36 Mar 19 01:30 ..
-drwxr-xr-x 4 ec2-user ec2-user   66 Mar 18 22:35 apis_for_sagemaker_models
-drwxr-xr-x 2 ec2-user ec2-user   55 Mar 18 12:46 csv_data
-drwxr-xr-x 3 ec2-user ec2-user   51 Mar 18 13:40 kmeans_movieoutput
-drwxr-xr-x 2 ec2-user ec2-user   48 Mar 18 12:46 python_notebook
-drwxr-xr-x 7 ec2-user ec2-user  187 Mar 18 13:42 sagemaker-migration-toolkit
+#2) Open Cloud9. Choose a t3.small machine, connectivity via SSM. 
+#3) Let's download the code now via 
+>>  git clone https://github.com/pkamra/recommendation-engine-full-stack.git
+>>  sudo yum install git-lfs
+>>  cd recommendation-engine-full-stack
+>>  git lfs fetch origin main (Is this needed)
+>>  git lfs pull origin
+
+#4) Decompress the zip file representing our raw data as follows
+>>  cd data
+>>  jar xvf csv_files.zip 
+
+#5) Some cleanup inside the data folder before we upload it to s3.
+>>  rm -rf __MACOSX/ csv_files.zip 
+
+This is how my cleaned data folder looks now
+>> Admin:~/environment/recommendation-engine-full-stack/data (main) $ ls -la
+>> drwxrwxr-x 2 ec2-user ec2-user  55 Apr  7 20:10 csv_files
+>> drwxrwxr-x 3 ec2-user ec2-user  68 Apr  7 21:54 kmeans_movieoutput
+>> drwxrwxr-x 2 ec2-user ec2-user  25 Apr  7 21:54 localui
+>> drwxrwxr-x 2 ec2-user ec2-user  90 Apr  7 21:54 python_notebook
 
 
-#5) Upload to s3
->>Admin:~/environment/temp_zip_contents $ aws s3 cp --recursive ./data s3://awesome2023-545313841491/
+#5) Upload the raw data to s3, so that it can be used by our sagemaker notebook environment
+>> Admin:~/environment/recommendation-engine-full-stack/data $ `aws s3 cp --recursive . s3://awesome2023-656151913794/`
 
 #6)On upload to S3 this is how it looks 
 ![plot](s3structureafterupload.png)
