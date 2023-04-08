@@ -81,10 +81,22 @@ Choose the default user profile.Create New IAM Role  for permissions associated 
     >> export AWS_DEFAULT_REGION=us-east-1
     >> Create a role Cloud9_LambdaExecutionRole with the right access policies. This role is added as the lambda execution role in config.json inside the .chalice folder
     >> `chalice deploy`
+    >> Curl command for testing
+curl -X POST https://xxxxxx.execute-api.us-east-1.amazonaws.com/api -H 'Content-Type: application/json' -d @- <<BODY
+{
+    "startYear":"2015","runtimeMinutes":"100","Thriller":"1","Music":"0",
+    "Documentary":"0","Film-Noir":"0","War":"0","History":"0","Animation":"0",
+    "Biography":"0","Horror":"0","Adventure":"1","Sport":"0","News":"0","Musical":"0",
+    "Mystery":"0","Action":"1","Comedy":"0","Sci-Fi":"1","Crime":"1","Romance":"0",
+    "Fantasy":"0","Western":"0","Drama":"0","Family":"0","averageRating":"7","numVotes":"50"
+}
+BODY
 
 #17) Test with Postman (Optional)
 
-Post payload is {"startYear":"2015","runtimeMinutes":"100","Thriller":"1","Music":"0","Documentary":"0","Film-Noir":"0","War":"0","History":"0","Animation":"0","Biography":"0","Horror":"0","Adventure":"1","Sport":"0","News":"0","Musical":"0","Mystery":"0","Action":"1","Comedy":"0","Sci-Fi":"1","Crime":"1","Romance":"0","Fantasy":"0","Western":"0","Drama":"0","Family":"0","averageRating":"7","numVotes":"50"}
+Post payload is 
+{"startYear":"2015","runtimeMinutes":"100","Thriller":"1","Music":"0","Documentary":"0","Film-Noir":"0","War":"0","History":"0","Animation":"0","Biography":"0","Horror":"0","Adventure":"1","Sport":"0","News":"0","Musical":"0","Mystery":"0","Action":"1","Comedy":"0","Sci-Fi":"1","Crime":"1","Romance":"0","Fantasy":"0","Western":"0","Drama":"0","Family":"0","averageRating":"7","numVotes":"50"
+}
 
 #18) Execute `chalice new-project query-athena-boto3`
    >> add requirements.txt and app.py contents to the root of the project from the chalice_query_api folder.  
@@ -92,6 +104,10 @@ Post payload is {"startYear":"2015","runtimeMinutes":"100","Thriller":"1","Music
    >>create query_results folder in the S3 bucket
    >>sed -i s@BUCKET_NAME@<your bucket name>@g app.py
    >> Execute `chalice deploy`
+   >> curl command for testing 
+   curl -X POST https://xxxxxxx.execute-api.us-east-1.amazonaws.com/api \
+   -H 'Content-Type: application/json' \
+   -d '{"cluster":"1.0"}'
 
 
 #19) Download the html file locally , modify the cluster and recommendation url api's with the actual API urls and see the end result from the UI.
@@ -100,8 +116,10 @@ Mine looks like this :)
 
 Cleanup steps
 #1) Shut down Sagemaker studio environment
-#2) Delete the deployed sagemaker endpoints
-#4) chalice undeploy ???
-#3) Delete the Cloud 9 environments
+#2) Inside the chalice projects perform`chalice delete` <TODO test>
+#2) Delete the Cloud 9 environments <TODO test>
+#2) Delete the deployed sagemaker endpoints <TODO test>
+
+
 
 
