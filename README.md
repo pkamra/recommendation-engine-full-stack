@@ -72,14 +72,14 @@ Choose the default user profile.Create New IAM Role  for permissions associated 
     >> Lets open a brand new Cloud 9 environment 
     >> Purpose of this API is to take in categories that you are interested in and then call the 2 sagemaker endpoints behind the scenes and return a cluster number
 #16) On the New Cloud 9 Instance do the following
-    >> `aws s3 cp --recursive  s3://awesome2023-xxxx/apis_for_sagemaker_models/ .`
+    >> `git clone https://github.com/pkamra/recommendation-engine-full-stack.git`
     >> `pip install chalice`
     >> `chalice new-project sagemaker-apigateway-lambda-chalice`
     >> To see hidden files in Cloud9 IDE , click on the gear icon and Click on Show environment root and show hidden files
     Then in the .chalice folder config.json file, add "automatic_layer": true, 
     >>add requirements.txt and app.py contents to the root of the project from the chalice_custom_scaling_kmeans_api folder. 
     >> export AWS_DEFAULT_REGION=us-east-1
-    >> Create role Cloud9_LambdaExecutionRole with Admin access. this role is mentioned as the lambda execution role in config.json
+    >> Create a role Cloud9_LambdaExecutionRole with the right access policies. This role is added as the lambda execution role in config.json inside the .chalice folder
     >> `chalice deploy`
 
 #17) Test with Postman (Optional)
@@ -93,6 +93,9 @@ Post payload is {"startYear":"2015","runtimeMinutes":"100","Thriller":"1","Music
    >>sed -i s@BUCKET_NAME@<your bucket name>@g app.py
    >> Execute `chalice deploy`
 
+
+#19) Download the html file locally , modify the cluster and recommendation url api's with the actual API urls and see the end result from the UI.
+Mine looks like this :)
 
 
 Cleanup steps
