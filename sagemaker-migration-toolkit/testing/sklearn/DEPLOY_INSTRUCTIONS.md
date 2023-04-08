@@ -1,1 +1,1 @@
-sed -i s@SAGEMAKER-ENDPOINT@<your sagemaker api URL>@g localtest.sh
+sed -i s@SAGEMAKER-ENDPOINT@<your sagemaker model endpoint name>@g localtest.sh

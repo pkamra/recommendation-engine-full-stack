@@ -29,48 +29,49 @@ This is how my cleaned data folder looks now
 >> drwxrwxr-x 2 ec2-user ec2-user  90 Apr  7 21:54 python_notebook
 
 
-#5) Upload the raw data to s3, so that it can be used by our sagemaker notebook environment
->> Admin:~/environment/recommendation-engine-full-stack/data $ `aws s3 cp --recursive . s3://awesome2023-656151913794/`
+#6) Upload the raw data to s3, so that it can be used by our sagemaker notebook environment
+>> Admin:~/environment/recommendation-engine-full-stack/data $ `aws s3 cp --recursive . s3://awesome2023-XXXXX/`
 
-#6)On upload to S3 this is how it looks 
-![plot](s3structureafterupload.png)
+#7)On upload to S3 this is how it looks 
+>> ![plot](s3structureafterupload.png)
 
-#7)Open Amazon Sagemaker. Click on Sagemaker Studio.Click on Create a Sagemaker domain.Set domain name as awesome2023-recommendation
-Choose the default user profile.Create New IAM Role  for permissions associated with teh User Profile. In the popup choose any S3 bucket.Note down the name of the newly created Role.  AmazonSageMaker-ExecutionRole-20230318T214355 
+#8)Open Amazon Sagemaker. Click on Sagemaker Studio.Click on Create a Sagemaker domain.Set domain name as awesome2023-recommendation
+Choose the default user profile.Create New IAM Role  for permissions associated with the User Profile. In the popup choose any S3 bucket.Note down the name of the newly created Role.  AmazonSageMaker-ExecutionRole-20230318T214355 
 
-#8)The creation of the new domain will take a few minutes.
-<While this is going on we will go over a few slides>
+#9)The creation of the new domain will take a few minutes.
 <Creation of the new domain takes about 5 minutes>
 
-#9)Go to user profiles and click on launch->Studio (takes about 4 minutes)
+#10)Go to user profiles and click on launch->Studio (takes about 4 minutes)
 
-#10)Go to File -> New Terminal
->>sagemaker-user@studio$ aws s3 cp s3://awesome2023-545313841491/python_notebook/AWSWomenInEngineering2023_V1.ipynb .
+#11)Go to File -> New Terminal
+>> Execute the following on the terminal 
+>> sagemaker-user@studio$ `aws s3 cp s3://awesome2023-545313841491/python_notebook/AWSWomenInEngineering2023_V2.ipynb .`
 
-#11)Double click the jupyter file.It will start the kernel. <takes about 5 mins>
+#12)Double clicking the Jupyter Notebook will start the kernel. This process takes about 5 mins.
 
 
-#12)Deployment of the sklearn using the sagemaker migration toolkit since it is a not a native sagemaker endpoint , but a  custom model being deployed in the sagemaker environment.
-    -  Open the Cloud9 environment , go to the folder sagemaker-migration-toolkit
-    >> pip install wheel
-    >> Do steps in README.md 
-        >>python setup.py bdist_wheel
-        >>pip install dist/sagemaker_migration_toolkit-0.0.1-py3-none-any.whl
-        >>Go to IAM and find the IAM role for Sagemaker of the format `arn:aws:iam::<ACCOUNT>:role/service-role/AmazonSageMaker-ExecutionRole-20210412T095523`
-        >>run the command `sagemaker_migration-configure --module-name sagemaker_migration.configure`
-    >> Go to testing folder 
-        >>Download the model.joblib from sagemaker notebook and upload it to your Cloud9 Console.
-        >>Go to the testing/sklearn folder and execute `python test.py`
-    >>Paste the sagemaker endpoint of sklearn in DEPLOY_INSTRUCTIONS.md and execute the script as follows on the command prompt in cloud 9
-        >> `sed -i s@SAGEMAKER-ENDPOINT@sm-endpoint-sklearn-2023-03-23-22-58-49@g localtest.sh`
-        >> Execute `sh localtest.sh`
-        >>Check if you have got scaled responses in prediction_response.json
+#13) Since the sklearn model is not a native sagemaker endpoint , but rather a  custom model being deployed in the sagemaker environment we will use the the sagemaker migration toolkit for deployment of the sklearn model as an endpoint in the Sagemaker environment. 
+    -  Open the Cloud9 environment , go to the folder sagemaker-migration-toolkit. Here are the high level steps. Detailed steps are mentioned in sagemaker-migration-toolkit/README.md
+        >> `pip install wheel`
+        >> `python setup.py bdist_wheel`
+        >> `pip install dist/sagemaker_migration_toolkit-0.0.1-py3-none-any.whl`
+        >> Go to IAM and find the IAM role for Sagemaker which will allow creating SageMaker Models, Endpoint Configurations, and Endpoints. It is best practice to create a role with the least priviledges needed. For quick start I used the Amazon managed Sagemaker execution role that I used earlier when I set up my Sagemaker domain which was of this kind of format `arn:aws:iam::<ACCOUNT>:role/service-role/AmazonSageMaker-ExecutionRole-XXXXXXX`
+        >> Execute this command `sagemaker_migration-configure --module-name sagemaker_migration.configure` and follow steps to enter the arn of the above role when asked.
+    >> Go to testing/sklearn folder 
+        >> Download the model.joblib from sagemaker notebook and upload it to your Cloud9 Console in testing/sklearn folder or download the model from yoru s3 bucket where you saved the model while executing the Jupyter Notebook in the steps above. I downlaoded from the s3 bucket as follows `aws s3 cp s3://awesome2023-XXXXXXXX/model.joblib ./`
+        >> Inside the testing/sklearn folder , execute `python test.py` . This will deploy the sagemaker endpoint for sklearn.
+        >> Once the endpoint is deployed , go to the AWS Sagemaker console and go to Inference-> Endpoints  and take down the name of the deployed endpoint. 
+        >> Copy the sed command from inside of DEPLOY_INSTRUCTIONS.md , replace the name of sagemaker endpoint and execute the script on the command prompt in cloud 9. `sed -i s@SAGEMAKER-ENDPOINT@xx-xx-xx-xxxx-xx-xx-xx-xx-xx@g localtest.sh`
+        >> Execute the following to test `sh localtest.sh`
+        >> Check if you have got scaled responses in prediction_response.json
 
-#13) Go back to Glue and create a default database before continuing to execute further cells in the Jupyter notebook.
-#14) After all cells are executed , let us create the API's using an open source tool called chalice which makes the creation of Lambda and API gateway very easy.
-    >> Lets open a brand new Cloud 9 environment (TODO)
-    >> Purpose of this API is to take in categories that you are interested in and then call the 2 sagemaker endpoints behind teh scenes and return a cluster number
-#15) On the New Cloud 9 Instance do the following
+#14) We will be saving the clustered final data for quick retrieval puposes, so Go back to Glue and create the `default` database before continuing to execute further cells in the Jupyter notebook. 
+
+
+#15)After all cells remaining are executed , let us create the API's using an open source tool called chalice which makes the creation of Lambda and API gateway very easy.
+    >> Lets open a brand new Cloud 9 environment 
+    >> Purpose of this API is to take in categories that you are interested in and then call the 2 sagemaker endpoints behind the scenes and return a cluster number
+#16) On the New Cloud 9 Instance do the following
     >> `aws s3 cp --recursive  s3://awesome2023-xxxx/apis_for_sagemaker_models/ .`
     >> `pip install chalice`
     >> `chalice new-project sagemaker-apigateway-lambda-chalice`
@@ -81,11 +82,11 @@ Choose the default user profile.Create New IAM Role  for permissions associated 
     >> Create role Cloud9_LambdaExecutionRole with Admin access. this role is mentioned as the lambda execution role in config.json
     >> `chalice deploy`
 
-#16) Test with Postman (Optional)
+#17) Test with Postman (Optional)
 
 Post payload is {"startYear":"2015","runtimeMinutes":"100","Thriller":"1","Music":"0","Documentary":"0","Film-Noir":"0","War":"0","History":"0","Animation":"0","Biography":"0","Horror":"0","Adventure":"1","Sport":"0","News":"0","Musical":"0","Mystery":"0","Action":"1","Comedy":"0","Sci-Fi":"1","Crime":"1","Romance":"0","Fantasy":"0","Western":"0","Drama":"0","Family":"0","averageRating":"7","numVotes":"50"}
 
-#17) Execute `chalice new-project query-athena-boto3`
+#18) Execute `chalice new-project query-athena-boto3`
    >> add requirements.txt and app.py contents to the root of the project from the chalice_query_api folder.  
    >>  Update role in config.json for this project
    >>create query_results folder in the S3 bucket
@@ -94,5 +95,10 @@ Post payload is {"startYear":"2015","runtimeMinutes":"100","Thriller":"1","Music
 
 
 
+Cleanup steps
+#1) Shut down Sagemaker studio environment
+#2) Delete the deployed sagemaker endpoints
+#4) chalice undeploy ???
+#3) Delete the Cloud 9 environments
 
 
