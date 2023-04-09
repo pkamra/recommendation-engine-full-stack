@@ -35,8 +35,9 @@ This is how my cleaned data folder looks now
 #7)On upload to S3 this is how it looks 
 - ![plot](s3structureafterupload.png)
 
-#8)Open Amazon Sagemaker. Click on Sagemaker Studio.Click on Create a Sagemaker domain.Set domain name as awesome2023-recommendation
-Choose the default user profile.Create New IAM Role  for permissions associated with the User Profile. In the popup choose any S3 bucket.Note down the name of the newly created Role.  AmazonSageMaker-ExecutionRole-20230318T214355 
+#8)Open Amazon Sagemaker. Click on Sagemaker Studio.Click on Create a Sagemaker domain.In  my case I set my domain name as awesome2023-recommendation
+Choose the default user profile. Create New IAM Role  for permissions associated with the User Profile. In the popup choose appropriate s3 buckets. 
+Note down the name of the newly created Role. In my case it started with AmazonSageMaker-ExecutionRole-xxxxxx 
 
 #9)The creation of the new domain will take a few minutes.
 <Creation of the new domain takes about 5 minutes>
@@ -45,7 +46,7 @@ Choose the default user profile.Create New IAM Role  for permissions associated 
 
 #11)Go to File -> New Terminal
 - Execute the following on the terminal 
-- sagemaker-user@studio$ `aws s3 cp s3://awesome2023-545313841491/python_notebook/AWSWomenInEngineering2023_V2.ipynb .`
+- sagemaker-user@studio$ `aws s3 cp s3://awesome2023-xxxxx/python_notebook/AWSWomenInEngineering2023_V2.ipynb .`
 
 #12)Double clicking the Jupyter Notebook will start the kernel. This process takes about 5 mins.
 
