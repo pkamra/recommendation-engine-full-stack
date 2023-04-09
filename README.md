@@ -53,37 +53,37 @@ Note down the name of the newly created Role. In my case it started with AmazonS
 
 #13) Since the sklearn model is not a native sagemaker endpoint , but rather a  custom model being deployed in the sagemaker environment we will use the the sagemaker migration toolkit for deployment of the sklearn model as an endpoint in the Sagemaker environment. 
 -  Open the Cloud9 environment , go to the folder sagemaker-migration-toolkit. Here are the high level steps. Detailed steps are mentioned in sagemaker-migration-toolkit/README.md
-    - `pip install wheel`
-        - `python setup.py bdist_wheel`
-        - `pip install dist/sagemaker_migration_toolkit-0.0.1-py3-none-any.whl`
-        - Go to IAM and find the IAM role for Sagemaker which will allow creating SageMaker Models, Endpoint Configurations, and Endpoints. It is best practice to create a role with the least priviledges needed. For quick start I used the Amazon managed Sagemaker execution role that I used earlier when I set up my Sagemaker domain which was of this kind of format `arn:aws:iam::<ACCOUNT>:role/service-role/AmazonSageMaker-ExecutionRole-XXXXXXX`
-        - Execute this command `sagemaker_migration-configure --module-name sagemaker_migration.configure` and follow steps to enter the arn of the above role when asked.
-    - Go to testing/sklearn folder 
-        - Download the model.joblib from sagemaker notebook and upload it to your Cloud9 Console in testing/sklearn folder or download the model from yoru s3 bucket where you saved the model while executing the Jupyter Notebook in the steps above. I downlaoded from the s3 bucket as follows `aws s3 cp s3://awesome2023-XXXXXXXX/model.joblib ./`
-        - Inside the testing/sklearn folder , execute `python test.py` . This will deploy the sagemaker endpoint for sklearn.
-        - Once the endpoint is deployed , go to the AWS Sagemaker console and go to Inference-> Endpoints  and take down the name of the deployed endpoint. 
-        - Copy the sed command from inside of DEPLOY_INSTRUCTIONS.md , replace the name of sagemaker endpoint and execute the script on the command prompt in cloud 9. `sed -i s@SAGEMAKER-ENDPOINT@xx-xx-xx-xxxx-xx-xx-xx-xx-xx@g localtest.sh`
-        - Execute the following to test `sh localtest.sh`
-        - Check if you have got scaled responses in prediction_response.json
+     - `pip install wheel`
+     - `python setup.py bdist_wheel`
+     - `pip install dist/sagemaker_migration_toolkit-0.0.1-py3-none-any.whl`
+     - Go to IAM and find the IAM role for Sagemaker which will allow creating SageMaker Models, Endpoint Configurations, and Endpoints. It is best practice to create a role with the least priviledges needed. For quick start I used the Amazon managed Sagemaker execution role that I used earlier when I set up my Sagemaker domain which was of this kind of format `arn:aws:iam::<ACCOUNT>:role/service-role/AmazonSageMaker-ExecutionRole-XXXXXXX`
+     - Execute this command `sagemaker_migration-configure --module-name sagemaker_migration.configure` and follow steps to enter the arn of the above role when asked.
+     - Go to testing/sklearn folder 
+     - Download the model.joblib from sagemaker notebook and upload it to your Cloud9 Console in testing/sklearn folder or download the model from yoru s3 bucket where you saved the model while executing the Jupyter Notebook in the steps above. I downlaoded from the s3 bucket as follows `aws s3 cp s3://awesome2023-XXXXXXXX/model.joblib ./`
+     - Inside the testing/sklearn folder , execute `python test.py` . This will deploy the sagemaker endpoint for sklearn.
+     - Once the endpoint is deployed , go to the AWS Sagemaker console and go to Inference-> Endpoints  and take down the name of the deployed endpoint. 
+     - Copy the sed command from inside of DEPLOY_INSTRUCTIONS.md , replace the name of sagemaker endpoint and execute the script on the command prompt in cloud 9. `sed -i s@SAGEMAKER-ENDPOINT@xx-xx-xx-xxxx-xx-xx-xx-xx-xx@g localtest.sh`
+     - Execute the following to test `sh localtest.sh`
+     - Check if you have got scaled responses in prediction_response.json
 
-#14) We will be saving the clustered final data for quick retrieval puposes, so Go back to Glue and create the `default` database before continuing to execute further cells in the Jupyter notebook. 
+#14) We will be saving the clustered final data for quick retrieval puposes, so lets go back to Glue and create the `default` database before continuing to execute further cells in the Jupyter notebook. 
 
 
-#15)After all cells remaining are executed , let us create the API's using an open source tool called chalice which makes the creation of Lambda and API gateway very easy.
-    - Lets open a brand new Cloud 9 environment 
-    - Purpose of this API is to take in categories that you are interested in and then call the 2 sagemaker endpoints behind the scenes and return a cluster number
+#15) After all cells remaining are executed, let us create the API's using an open source tool called chalice which makes the creation of Lambda and API gateway very easy.
+- Lets open a brand new Cloud 9 environment 
+- Purpose of this API is to take in categories that you are interested in and then call the 2 sagemaker endpoints behind the scenes and return a cluster number
+
 #16) On the New Cloud 9 Instance do the following
-    - `git clone https://github.com/pkamra/recommendation-engine-full-stack.git`
-    - `pip install chalice`
-    - `chalice new-project sagemaker-apigateway-lambda-chalice`
-    - To see hidden files in Cloud9 IDE , click on the gear icon and Click on Show environment root and show hidden files
-    Then in the .chalice folder config.json file, add "automatic_layer": true, 
-    -add requirements.txt and app.py contents to the root of the project from the chalice_custom_scaling_kmeans_api folder. 
-    - export AWS_DEFAULT_REGION=us-east-1
-    - Create a role Cloud9_LambdaExecutionRole with the right access policies. This role is added as the lambda execution role in config.json inside the .chalice folder
-    - `chalice deploy`
-    - Curl command for testing
-curl -X POST https://xxxxxx.execute-api.us-east-1.amazonaws.com/api -H 'Content-Type: application/json' -d @- <<BODY
+- `git clone https://github.com/pkamra/recommendation-engine-full-stack.git`
+- `pip install chalice`
+- `chalice new-project sagemaker-apigateway-lambda-chalice`
+- To see hidden files in Cloud9 IDE , click on the gear icon and Click on Show environment root and show hidden files
+- Then in the .chalice folder config.json file, add "automatic_layer": true, add requirements.txt and app.py contents to the root of the project from the chalice_custom_scaling_kmeans_api folder. 
+- export AWS_DEFAULT_REGION=us-east-1
+- Create a role Cloud9_LambdaExecutionRole with the right access policies. This role is added as the lambda execution role in config.json inside the .chalice folder
+- `chalice deploy`
+- Curl command for testing
+```curl -X POST https://xxxxxx.execute-api.us-east-1.amazonaws.com/api -H 'Content-Type: application/json' -d @- <<BODY
 {
     "startYear":"2015","runtimeMinutes":"100","Thriller":"1","Music":"0",
     "Documentary":"0","Film-Noir":"0","War":"0","History":"0","Animation":"0",
@@ -91,7 +91,7 @@ curl -X POST https://xxxxxx.execute-api.us-east-1.amazonaws.com/api -H 'Content-
     "Mystery":"0","Action":"1","Comedy":"0","Sci-Fi":"1","Crime":"1","Romance":"0",
     "Fantasy":"0","Western":"0","Drama":"0","Family":"0","averageRating":"7","numVotes":"50"
 }
-BODY
+BODY```
 
 #17) Test with Postman (Optional)
 
