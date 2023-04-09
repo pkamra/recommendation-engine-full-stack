@@ -94,10 +94,9 @@ Note down the name of the newly created Role. In my case it started with AmazonS
 BODY```
 
 #17) Test with Postman (Optional)
-
 Post payload is 
-{"startYear":"2015","runtimeMinutes":"100","Thriller":"1","Music":"0","Documentary":"0","Film-Noir":"0","War":"0","History":"0","Animation":"0","Biography":"0","Horror":"0","Adventure":"1","Sport":"0","News":"0","Musical":"0","Mystery":"0","Action":"1","Comedy":"0","Sci-Fi":"1","Crime":"1","Romance":"0","Fantasy":"0","Western":"0","Drama":"0","Family":"0","averageRating":"7","numVotes":"50"
-}
+```{"startYear":"2015","runtimeMinutes":"100","Thriller":"1","Music":"0","Documentary":"0","Film-Noir":"0","War":"0","History":"0","Animation":"0","Biography":"0","Horror":"0","Adventure":"1","Sport":"0","News":"0","Musical":"0","Mystery":"0","Action":"1","Comedy":"0","Sci-Fi":"1","Crime":"1","Romance":"0","Fantasy":"0","Western":"0","Drama":"0","Family":"0","averageRating":"7","numVotes":"50"
+}```
 
 #18) Execute `chalice new-project query-athena-boto3`
    - add requirements.txt and app.py contents to the root of the project from the chalice_query_api folder.  
@@ -106,9 +105,9 @@ Post payload is
    -sed -i s@BUCKET_NAME@<your bucket name>@g app.py
    - Execute `chalice deploy`
    - curl command for testing 
-   curl -X POST https://xxxxxxx.execute-api.us-east-1.amazonaws.com/api \
+    ``` curl -X POST https://xxxxxxx.execute-api.us-east-1.amazonaws.com/api \
    -H 'Content-Type: application/json' \
-   -d '{"cluster":"1.0"}'
+   -d '{"cluster":"1.0"}'   ```
 
 
 #19) Download the html file locally , modify the cluster and recommendation url api's with the actual API urls and see the end result from the UI.
