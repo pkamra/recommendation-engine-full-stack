@@ -33,7 +33,7 @@ This is how my cleaned data folder looks now
 - Admin:~/environment/recommendation-engine-full-stack/data $ `aws s3 cp --recursive . s3://awesome2023-XXXXX/`
 
 #7)On upload to S3 this is how it looks 
-- ![plot](s3structureafterupload.png)
+![plot](s3structureafterupload.png)
 
 #8)Open Amazon Sagemaker. Click on Sagemaker Studio.Click on Create a Sagemaker domain.In  my case I set my domain name as awesome2023-recommendation
 Choose the default user profile. Create New IAM Role  for permissions associated with the User Profile. In the popup choose appropriate s3 buckets. 
