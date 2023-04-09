@@ -2,7 +2,8 @@
 
 
 
-- Diagrammatic flow of our architecture
+## Diagrammatic flow of our process
+![plot](recommendation_flow.png)
 
 
 #1) Login as Admin to the AWS Account in which the setup will be done.
