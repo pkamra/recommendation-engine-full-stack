@@ -82,8 +82,7 @@ Note down the name of the newly created Role. In my case it started with AmazonS
 - export AWS_DEFAULT_REGION=us-east-1
 - Create a role Cloud9_LambdaExecutionRole with the right access policies. This role is added as the lambda execution role in config.json inside the .chalice folder
 - `chalice deploy`
-- Curl command for testing
-```curl -X POST https://xxxxxx.execute-api.us-east-1.amazonaws.com/api -H 'Content-Type: application/json' -d @- <<BODY
+- Curl command for testing ```curl -X POST https://xxxxxx.execute-api.us-east-1.amazonaws.com/api -H 'Content-Type: application/json' -d @- <<BODY
 {
     "startYear":"2015","runtimeMinutes":"100","Thriller":"1","Music":"0",
     "Documentary":"0","Film-Noir":"0","War":"0","History":"0","Animation":"0",
@@ -91,7 +90,7 @@ Note down the name of the newly created Role. In my case it started with AmazonS
     "Mystery":"0","Action":"1","Comedy":"0","Sci-Fi":"1","Crime":"1","Romance":"0",
     "Fantasy":"0","Western":"0","Drama":"0","Family":"0","averageRating":"7","numVotes":"50"
 }
-BODY```
+BODY ```
 
 #17) Test with Postman (Optional)
 Post payload is 
