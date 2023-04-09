@@ -110,14 +110,13 @@ Post payload is
 
 
 #19) Download the html file locally , modify the cluster and recommendation url api's with the actual API urls and see the end result from the UI.
-Mine looks like this :)
 
 
-Cleanup steps
-#1) Shut down Sagemaker studio environment
-#2) Inside the chalice projects perform`chalice delete` <TODO test>
-#2) Delete the Cloud 9 environments <TODO test>
-#2) Delete the deployed sagemaker endpoints <TODO test>
+#20) Cleanup steps
+- Shut down Sagemaker studio environment
+- Inside the chalice projects perform`chalice delete` 
+- Delete the Cloud 9 environments 
+- Delete the deployed sagemaker endpoints 
 
 
 
