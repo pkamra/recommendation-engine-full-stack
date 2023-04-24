@@ -53,8 +53,13 @@ This is how my cleaned data folder looks now
 - Execute the following on the terminal 
 - `aws s3 cp s3://awesome2023-xxxxx/python_notebook/AWSWomenInEngineering2023_V2.ipynb .`
 
-#12) Double clicking the Jupyter Notebook will start the kernel. This process takes about 5 mins. After the kernel starts, execute the Jupyter notebook cells and start analyzing, cleaning and preparing the data so that its ready to be used as input for training the machine learning models.
-We have 2 models in this recommendation engine flow. One of the models is for creating a scaling algorithms for scaling all the relevant features, so that no one feature overpowers the other. The next model is a kmeans clustering model which is applied to the scaled dataset for segmentation. We will continue executing all the cells till we reach the cell which needs us to use the sagemaker migration toolkit for easily creating a sagemer compatible endpoint for our custom sklearn scaling algorithm.
+#12) Double clicking the Jupyter Notebook will start the kernel. This process takes about 5 mins. <br/>
+In a nutshell here is what we will do in the Notebook.
+- We will start analyzing, cleaning and preparing the data so that its ready to be used as input for training the machine learning models.
+- We have 2 models in this recommendation engine flow.
+- One of the models is a custom scaling algorithm for scaling the relevant features, so that no one feature overpowers the other.  We will use sagemaker migration toolkit for easily creating a sagemer compatible endpoint for this custom model.
+- The second model is a kmeans clustering model applied to the scaled dataset for segmentation. 
+- We will continue executing all the cells till we reach the cell which needs us to use the sagemaker migration toolkit.
 
 
 #13) Since the sklearn model is not a native sagemaker endpoint , but rather a  custom model being deployed in the sagemaker environment we will use the the sagemaker migration toolkit for deployment of the sklearn model as an endpoint in the Sagemaker environment. 
