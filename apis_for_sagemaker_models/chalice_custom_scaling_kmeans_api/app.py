@@ -76,7 +76,7 @@ def handle_data():
     print(result)
     # Send everything to the Sagemaker endpoint
     res = sagemaker.invoke_endpoint(
-        EndpointName='sm-endpoint-sklearn-2023-03-12-06-11-52',
+        EndpointName='sm-endpoint-sklearn-xxxxxx',
         Body=result,
         ContentType='application/json',
         Accept='application/json'
@@ -90,7 +90,7 @@ def handle_data():
     
     arr_2d = np.reshape(np_array, (1, len(np_array)))
     payload = np2csv(arr_2d.astype('float32'))
-    responsekmeans = sagemaker.invoke_endpoint(EndpointName="kmeans-2023-03-14-23-58-03-305", ContentType="text/csv", Body=payload)
+    responsekmeans = sagemaker.invoke_endpoint(EndpointName="kmeans-xxxxxx", ContentType="text/csv", Body=payload)
     resultkmeans = json.loads(responsekmeans["Body"].read().decode())
     
     return resultkmeans['predictions'][0]['closest_cluster']
