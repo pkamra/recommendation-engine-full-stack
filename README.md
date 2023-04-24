@@ -6,14 +6,15 @@
 ![plot](recommendation_flow.png)
 
 
-#1) Login as Admin to the AWS Account in which the setup will be done.
-#2) Open Cloud9. Choose a t3.small machine, connectivity via SSM. 
-#3) Let's download the code now via 
--  git clone https://github.com/pkamra/recommendation-engine-full-stack.git
--  sudo yum install git-lfs
--  cd recommendation-engine-full-stack
--  git lfs fetch origin main (Is this needed)
--  git lfs pull origin
+#1) Login as Admin to the AWS Account in which the setup will be done.<br/>
+#2) Open Cloud9. Choose a t3.small machine, connectivity via SSM. <br/>
+#3) Let's download the code now  
+<code>git clone https://github.com/pkamra/recommendation-engine-full-stack.git <br/>
+    sudo yum install git-lfs<br/>
+    cd recommendation-engine-full-stack<br/>
+    git lfs fetch origin main<br/>
+    git lfs pull origin<br/>
+</code>
 
 #4) Decompress the zip file representing our raw data as follows
 -  cd data
@@ -30,26 +31,29 @@ This is how my cleaned data folder looks now
 - drwxrwxr-x 2 ec2-user ec2-user  90 Apr  7 21:54 python_notebook
 
 
-#6) Upload the raw data to s3, so that it can be used by our sagemaker notebook environment
+#6) Upload the raw data to s3, so that it can be used by our sagemaker notebook environment. Before executing the below command create a bucket in s3.
 - Admin:~/environment/recommendation-engine-full-stack/data $ `aws s3 cp --recursive . s3://awesome2023-XXXXX/`
 
 #7)On upload to S3 this is how it looks 
 - ![plot](s3structureafterupload.png)
 
-#8)Open Amazon Sagemaker. Click on Sagemaker Studio.Click on Create a Sagemaker domain.In  my case I set my domain name as awesome2023-recommendation
-Choose the default user profile. Create New IAM Role  for permissions associated with the User Profile. In the popup choose appropriate s3 buckets. 
-Note down the name of the newly created Role. In my case it started with AmazonSageMaker-ExecutionRole-xxxxxx 
+#8)Now we will get ready to start exploring our data in Sagemaker Studio environment.
+- On AWS Console select Amazon Sagemaker. 
+- Click on Create a Sagemaker domain. In  my case I set my domain name as awesome2023-recommendation.
+- Choose the default user profile. Choose "Create an IAM Role" for permissions associated with the User Profile. In the popup choose appropriate s3 buckets. 
+- Note down the name of the newly created Role. In my case it started with AmazonSageMaker-ExecutionRole-xxxxxx (781)
 
 #9)The creation of the new domain will take a few minutes.
 <Creation of the new domain takes about 5 minutes>
 
 #10)Go to user profiles and click on launch->Studio (takes about 4 minutes)
 
-#11)Go to File -> New Terminal
+#11)Once the Sagemaker Studio opens, 
+- Go to File -> New Terminal
 - Execute the following on the terminal 
-- sagemaker-user@studio$ `aws s3 cp s3://awesome2023-xxxxx/python_notebook/AWSWomenInEngineering2023_V2.ipynb .`
+- `aws s3 cp s3://awesome2023-xxxxx/python_notebook/AWSWomenInEngineering2023_V2.ipynb .`
 
-#12)Double clicking the Jupyter Notebook will start the kernel. This process takes about 5 mins.
+#12) Double clicking the Jupyter Notebook will start the kernel. This process takes about 5 mins.
 
 
 #13) Since the sklearn model is not a native sagemaker endpoint , but rather a  custom model being deployed in the sagemaker environment we will use the the sagemaker migration toolkit for deployment of the sklearn model as an endpoint in the Sagemaker environment. 
