@@ -116,8 +116,8 @@ curl -X POST https://xxxxxx.execute-api.us-east-1.amazonaws.com/api -H 'Content-
 {
     "startYear":"2015","runtimeMinutes":"100","Thriller":"1","Music":"0",
     "Documentary":"0","Film-Noir":"0","War":"0","History":"0","Animation":"0",
-    "Biography":"0","Horror":"0","Adventure":"1","Sport":"0","News":"0","Musical":"0",
-    "Mystery":"0","Action":"1","Comedy":"0","Sci-Fi":"1","Crime":"1","Romance":"0",
+    "Biography":"0","Horror":"0","Adventure":"0","Sport":"0","News":"0","Musical":"0",
+    "Mystery":"0","Action":"0","Comedy":"0","Sci-Fi":"1","Crime":"0","Romance":"0",
     "Fantasy":"0","Western":"0","Drama":"0","Family":"0","averageRating":"7","numVotes":"50"
 }
 BODY 
@@ -130,13 +130,27 @@ Post payload is
 #18) Execute `chalice new-project query-athena-boto3`
    - add requirements.txt and app.py contents to the root of the project from the chalice_query_api folder.  
    - Update role in config.json for this project
-   - create query_results folder in the S3 bucket
+   - this is how yoru config.json shoudl look like :<br/>
+   {<br/>
+        "version": "2.0",<br/>
+        "app_name": "query-athena-boto3",<br/>
+        "iam_role_arn": "arn:aws:iam::545313841491:role/Cloud9_LambdaExecutionRole",<br/>
+        "manage_iam_role": false,<br/>
+        "stages": {<br/>
+            "dev": {<br/>
+            "api_gateway_stage": "api"<br/>
+            }<br/>
+        }<br/>
+    }<br/>
+   - create query_results folder in the S3 bucket that you have been using so far
+   - Execute  `cd query-athena-boto3/`
    - sed -i s@BUCKET_NAME@<your bucket name>@g app.py
    - Execute `chalice deploy`
-   - curl command for testing 
-    ``` curl -X POST https://xxxxxxx.execute-api.us-east-1.amazonaws.com/api \
+   - curl command for testing <br/>
+  <code> curl -X POST https://xxxxxxx.execute-api.us-east-1.amazonaws.com/api \ <br/>
    -H 'Content-Type: application/json' \
-   -d '{"cluster":"1.0"}'   ```
+   -d '{"cluster":"1.0"}'  <br/>
+   </code>
 
 
 #19) Download the html file locally , modify the cluster and recommendation url api's with the actual API urls and see the end result from the UI.
