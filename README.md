@@ -155,11 +155,15 @@ Post payload is
 
 #19) Download the html file locally , modify the cluster and recommendation url api's with the actual API urls and see the end result from the UI.
 
+#21) Here is how my UI looks when everything is hooked up:<br/>
+![plot](myflix1.png)<br/>
+![plot](myflix2.png)<br/>
+![plot](myflix3.png)<br/>
 
 #20) Cleanup steps
-- Shut down Sagemaker studio environment
 - Inside the chalice projects perform`chalice delete` 
 - Delete the Cloud 9 environments 
+- Shut down Sagemaker studio environment
 - Delete the deployed sagemaker endpoints 
 
 
