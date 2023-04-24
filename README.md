@@ -92,10 +92,27 @@ In a nutshell here is what we will do in the Notebook.
 - To see hidden files in Cloud9 IDE , click on the gear icon and Click on Show environment root and show hidden files
 - Then in the .chalice folder config.json file, add "automatic_layer": true, 
 - Add requirements.txt and app.py contents to the root of the project from the `recommendation-engine-full-stack/apis_for_sagemaker_models/chalice_custom_scaling_kmeans_api` folder. 
-- export AWS_DEFAULT_REGION=us-east-1
+- Update ml model endpoint names in app.py
+- Execute `export AWS_DEFAULT_REGION=us-east-1`
 - Create a role Cloud9_LambdaExecutionRole with the right access policies. This role is added as the lambda execution role in config.json inside the .chalice folder
-- `chalice deploy`
-- curl -X POST https://xxxxxx.execute-api.us-east-1.amazonaws.com/api -H 'Content-Type: application/json' -d @- <<BODY
+- Finally this is how your config.json should look like <br/>
+<code>
+{<br/>
+    "version": "2.0",<br/>
+    "automatic_layer": true,<br/>
+    "manage_iam_role": false,<br/>
+    "iam_role_arn": "arn:aws:iam::XXXX:role/Cloud9_LambdaExecutionRole",<br/>
+    "app_name": "sagemaker-apigateway-lambda-chalice",<br/>
+    "stages": {<br/>
+      "dev": {<br/>
+        "api_gateway_stage": "api"<br/>
+      }<br/>
+    }<br/>
+  }<br/>
+  </code>
+- In sagemaker-apigateway-lambda-chalice folder execute `chalice deploy`
+- For testing the deployed API do the following<br/>
+curl -X POST https://xxxxxx.execute-api.us-east-1.amazonaws.com/api -H 'Content-Type: application/json' -d @- <<BODY
 {
     "startYear":"2015","runtimeMinutes":"100","Thriller":"1","Music":"0",
     "Documentary":"0","Film-Noir":"0","War":"0","History":"0","Animation":"0",
