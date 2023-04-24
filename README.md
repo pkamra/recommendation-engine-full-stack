@@ -54,6 +54,7 @@ This is how my cleaned data folder looks now
 - `aws s3 cp s3://awesome2023-xxxxx/python_notebook/AWSWomenInEngineering2023_V2.ipynb .`
 
 #12) Double clicking the Jupyter Notebook will start the kernel. This process takes about 5 mins. After the kernel starts, execute the Jupyter notebook cells and start analyzing, cleaning and preparing the data so that its ready to be used as input for training the machine learning models.
+We have 2 models in this recommendation engine flow. One of the models is for creating a scaling algorithms for scaling all the relevant features, so that no one feature overpowers the other. The next model is a kmeans clustering model which is applied to the scaled dataset for segmentation. We will continue executing all the cells till we reach the cell which needs us to use the sagemaker migration toolkit for easily creating a sagemer compatible endpoint for our custom sklearn scaling algorithm.
 
 
 #13) Since the sklearn model is not a native sagemaker endpoint , but rather a  custom model being deployed in the sagemaker environment we will use the the sagemaker migration toolkit for deployment of the sklearn model as an endpoint in the Sagemaker environment. 
@@ -64,7 +65,7 @@ This is how my cleaned data folder looks now
      - Go to IAM and find the IAM role for Sagemaker which will allow creating SageMaker Models, Endpoint Configurations, and Endpoints. It is best practice to create a role with the least priviledges needed. For quick start I used the Amazon managed Sagemaker execution role that I used earlier when I set up my Sagemaker domain which was of this kind of format `arn:aws:iam::<ACCOUNT>:role/service-role/AmazonSageMaker-ExecutionRole-XXXXXXX`
      - Execute this command `sagemaker_migration-configure --module-name sagemaker_migration.configure` and follow steps to enter the arn of the above role when asked.
      - Go to testing/sklearn folder 
-     - Download the model.joblib from sagemaker notebook and upload it to your Cloud9 Console in testing/sklearn folder or download the model from yoru s3 bucket where you saved the model while executing the Jupyter Notebook in the steps above. I downlaoded from the s3 bucket as follows `aws s3 cp s3://awesome2023-XXXXXXXX/model.joblib ./`
+     - Download the model.joblib from sagemaker notebook and upload it to your Cloud9 Console in testing/sklearn folder or download the model from your s3 bucket where you saved the model while executing the Jupyter Notebook in the steps above. I downlaoded from the s3 bucket as follows `aws s3 cp s3://awesome2023-XXXXXXXX/model.joblib ./`
      - Inside the testing/sklearn folder , execute `python test.py` . This will deploy the sagemaker endpoint for sklearn.
      - Once the endpoint is deployed , go to the AWS Sagemaker console and go to Inference-> Endpoints  and take down the name of the deployed endpoint. 
      - Copy the sed command from inside of DEPLOY_INSTRUCTIONS.md , replace the name of sagemaker endpoint and execute the script on the command prompt in cloud 9. `sed -i s@SAGEMAKER-ENDPOINT@xx-xx-xx-xxxx-xx-xx-xx-xx-xx@g localtest.sh`
