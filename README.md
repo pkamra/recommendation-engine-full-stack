@@ -160,10 +160,20 @@ Post payload is
 ![plot](myflix3.png)<br/>
 
 #20) Cleanup steps
-- Inside the chalice projects perform`chalice delete` 
+- Go to the Cloud 9 environment where you ran chalice.
+- At the root of the query-athena-boto3 and sagemaker-apigateway-lambda-chalice prohects  exceute the following command:<br/>
+   `chalice delete` 
 - Delete the Cloud 9 environments 
-- Shut down Sagemaker studio environment
 - Delete the deployed sagemaker endpoints 
+- Launch Sagemaker studio in which you did all your work. 
+- Shut down Sagemaker studio environment.
+- Delete the user profile from the Sagemaker domain. For that all apps associated with User In User Details section should be deleted.
+- Follow this link to delete user https://docs.aws.amazon.com/sagemaker/latest/dg/domain-user-profile-add-remove.html
+- Delete the sagemaker domain.
+- Delete the S3 bcuket that you has created.
+
+
+
 
 
 
