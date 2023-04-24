@@ -152,7 +152,6 @@ Post payload is
    -d '{"cluster":"1.0"}'  <br/>
    </code>
 
-
 #19) Download the html file locally , modify the cluster and recommendation url api's with the actual API urls and see the end result from the UI.
 
 #21) Here is how my UI looks when everything is hooked up:<br/>
