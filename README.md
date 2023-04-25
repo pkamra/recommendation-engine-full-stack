@@ -166,6 +166,7 @@ Post payload is
 - Delete the Cloud 9 environments 
 - Delete the deployed sagemaker endpoints 
 - Launch Sagemaker studio in which you did all your work. 
+- Delete all files in the Sagemaker studio.
 - Shut down Sagemaker studio environment.
 - Delete the user profile from the Sagemaker domain. For that all apps associated with User In User Details section should be deleted.
 - Follow this link to delete user https://docs.aws.amazon.com/sagemaker/latest/dg/domain-user-profile-add-remove.html
