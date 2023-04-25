@@ -109,18 +109,20 @@ In a nutshell here is what we will do in the Notebook.
       }<br/>
     }<br/>
   }<br/>
-  </code>
+</code>
+
 - In sagemaker-apigateway-lambda-chalice folder execute `chalice deploy`
 - For testing the deployed API do the following<br/>
-curl -X POST https://xxxxxx.execute-api.us-east-1.amazonaws.com/api -H 'Content-Type: application/json' -d @- <<BODY
-{
-    "startYear":"2015","runtimeMinutes":"100","Thriller":"1","Music":"0",
-    "Documentary":"0","Film-Noir":"0","War":"0","History":"0","Animation":"0",
-    "Biography":"0","Horror":"0","Adventure":"0","Sport":"0","News":"0","Musical":"0",
-    "Mystery":"0","Action":"0","Comedy":"0","Sci-Fi":"1","Crime":"0","Romance":"0",
-    "Fantasy":"0","Western":"0","Drama":"0","Family":"0","averageRating":"7","numVotes":"50"
-}
-BODY 
+curl -X POST https://xxxxxx.execute-api.us-east-1.amazonaws.com/api -H 'Content-Type: application/json' -d @- <<BODY 
+{ <br/>
+    "startYear":"2015","runtimeMinutes":"100","Thriller":"1","Music":"0", <br/>
+    "Documentary":"0","Film-Noir":"0","War":"0","History":"0","Animation":"0",<br/>
+    "Biography":"0","Horror":"0","Adventure":"0","Sport":"0","News":"0","Musical":"0",<br/>
+    "Mystery":"0","Action":"0","Comedy":"0","Sci-Fi":"1","Crime":"0","Romance":"0",<br/>
+    "Fantasy":"0","Western":"0","Drama":"0","Family":"0","averageRating":"7","numVotes":"50"<br/>
+}<br/>
+BODY <br/>
+
 
 #17) Test with Postman (Optional)
 Post payload is 
