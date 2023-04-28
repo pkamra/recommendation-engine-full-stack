@@ -41,8 +41,8 @@ This is how my cleaned data folder looks now
 - On AWS Console select Amazon Sagemaker. 
 - Click on Create a Sagemaker domain. In  my case I set my domain name as awesome2023-recommendation.
 - Choose the default user profile. Choose "Create an IAM Role" for permissions associated with the User Profile. In the popup choose appropriate s3 buckets.
-![plot](Sagemakerrolecreation.png) <br/>
 ![plot](S3bucketsAccessNewSagemakerrole.png) <br/>
+![plot](Sagemakerrolecreation.png) <br/>
 - Note down the name of the newly created Role. In my case it started with AmazonSageMaker-ExecutionRole-xxxxxx 
 
 #9)The creation of the new domain will take a few minutes.
