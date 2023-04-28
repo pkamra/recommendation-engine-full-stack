@@ -2,7 +2,7 @@
 
 
 
-## Diagrammatic flow of our process
+### Diagrammatic flow of our process
 ![plot](recommendation_flow.png)
 
 
