@@ -74,10 +74,12 @@ In a nutshell here is what we will do in the Notebook.
      - Execute this command `sagemaker_migration-configure --module-name sagemaker_migration.configure` 
      and follow steps to enter the arn of the above role when asked.
      - Go to testing/sklearn folder 
-     - Download the model from your s3 bucket where you saved the model while executing the Jupyter Notebook in the steps above. I downloaded from the s3 bucket we have been using so far as follows `aws s3 cp s3://awesome2023-XXXXXXXX/model.joblib ./`
+     - Download the model from your s3 bucket where you saved the model while executing the Jupyter Notebook in the steps above. <br/>
+     I downloaded from the s3 bucket we have been using so far as follows `aws s3 cp s3://awesome2023-XXXXXXXX/model.joblib ./`
      - Inside the testing/sklearn folder , execute `python test.py` . This will deploy the sagemaker endpoint for sklearn.
      - Once the endpoint is deployed , go to the AWS Sagemaker console and go to Inference-> Endpoints  and take down the name of the deployed endpoint. 
-     - Copy the sed command from inside of DEPLOY_INSTRUCTIONS.md , replace the name of sagemaker endpoint and execute the script on the command prompt in cloud 9. `sed -i s@SAGEMAKER-ENDPOINT@xx-xx-xx-xxxx-xx-xx-xx-xx-xx@g localtest.sh`
+     - Open DEPLOY_INSTRUCTIONS.md and replace the name of sagemaker endpoint in it. Execute the script on the command prompt in cloud 9 as follows:<br/>
+    `sed -i s@SAGEMAKER-ENDPOINT@xx-xx-xx-xxxx-xx-xx-xx-xx-xx@g localtest.sh`
      - Execute the following to test `sh localtest.sh`
      - Check if you have got scaled responses in prediction_response.json
 
