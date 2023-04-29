@@ -44,7 +44,7 @@ This is how my cleaned data folder looks now
 ![plot](newrole.png) <br/>
 ![plot](s3bucket.png) <br/>
 - Note down the name of the newly created Role. In my case it started with AmazonSageMaker-ExecutionRole-xxxxxx.
-- In IAM, add glue:CreateTable policy to the above  AmazonSageMaker-ExecutionRole-xxxxxx Role.
+- In IAM, add glue:CreateTable policy to the above  AmazonSageMaker-ExecutionRole-xxxxxx Role. For Quick SetUp I added the AWSGlueServiceRole Managed policy.
 
 #9)The creation of the new domain will take a few minutes.
 <Creation of the new domain takes about 5 minutes>
@@ -54,7 +54,7 @@ This is how my cleaned data folder looks now
 #11)Once the Sagemaker Studio opens, 
 - Go to File -> New Terminal
 - Execute the following on the terminal 
-- `aws s3 cp s3://awesome2023-xxxxx/python_notebook/AWSWomenInEngineering2023_V2.ipynb .`
+- `aws s3 cp s3://awesome2023-xxxxx/python_notebook/AWSWomenInEngineering2023_V3.ipynb .`
 
 #12) Double clicking the Jupyter Notebook will start the kernel. This process takes about 5 mins. <br/>
 In a nutshell here is what we will do in the Notebook.
