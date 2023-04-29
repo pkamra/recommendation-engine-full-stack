@@ -43,7 +43,8 @@ This is how my cleaned data folder looks now
 - Choose the default user profile. Choose "Create an IAM Role" for permissions associated with the User Profile. In the popup choose appropriate s3 buckets.
 ![plot](newrole.png) <br/>
 ![plot](s3bucket.png) <br/>
-- Note down the name of the newly created Role. In my case it started with AmazonSageMaker-ExecutionRole-xxxxxx 
+- Note down the name of the newly created Role. In my case it started with AmazonSageMaker-ExecutionRole-xxxxxx.
+- In IAM, add glue:CreateTable policy to the above  AmazonSageMaker-ExecutionRole-xxxxxx Role.
 
 #9)The creation of the new domain will take a few minutes.
 <Creation of the new domain takes about 5 minutes>
