@@ -8,44 +8,12 @@ S3_OUTPUT = 's3://BUCKET_NAME/query-results/'
 # Number of Retries
 RETRY_COUNT = 10
 app = Chalice(app_name='query-athena-boto3')
-
-def dummy():
-    import boto3
-    """
-    Collection of all s3.client() functions.
-    The sole purpose is to force Chalice to generate the right permissions in the policy.
-    Does nothing and returns nothing.
-    """
-    try:
-        s3 = boto3.client('s3')
-        s3.put_object()
-        s3.download_file()
-        s3.get_object()
-        s3.list_objects_v2()
-        s3.get_bucket_location()
-    except:
-        print("Error in s3 premission granting")
-    else:
-        print("No Error in s3 premission grating")
-
-def glueinitialize():
-    import boto3
-    try:
-        client = boto3.client('glue',region_name='us-east-1')
-        client.get_tables( DatabaseName = "default" )
-    except Exception as e:
-        print("Error in glue premission granting")
-        print(e)
-    else:
-        print("No Error in glue premission granting")
     
 
 @app.route('/', methods=['POST'], content_types=['application/json'], cors=True)
 def index():
     import time
     import boto3
-    dummy()
-    glueinitialize()
     client = boto3.client('athena')
     input_json = app.current_request.json_body['cluster'] 
     CLUSTERNO = float(input_json)

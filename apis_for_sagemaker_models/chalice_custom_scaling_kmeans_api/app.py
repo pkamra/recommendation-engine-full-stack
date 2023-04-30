@@ -54,7 +54,6 @@ def handle_data():
         'Horror': [int(request_data.get('Horror', '0'))],
         'Adventure': [int(request_data.get('Adventure', '0'))],
         'Sport': [int(request_data.get('Sport', '0'))],
-        'News': [int(request_data.get('News', '0'))],
         'Musical': [int(request_data.get('Musical', '0'))],
         'Mystery': [int(request_data.get('Mystery', '0'))],
         'Action': [int(request_data.get('Action', '0'))],

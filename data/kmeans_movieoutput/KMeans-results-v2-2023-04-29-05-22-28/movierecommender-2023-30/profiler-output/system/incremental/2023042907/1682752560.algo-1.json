@@ -1,0 +1,16 @@
+{"Type":"memory","Name":"MemoryUsedPercent","Dimension":"","Value":17.13,"NodeId":"algo-1","Timestamp":1682752560.004889}
+{"Type":"cpu","Name":"cpu0","Dimension":"CPUUtilization","Value":68.00,"NodeId":"algo-1","Timestamp":1682752560.004957}
+{"Type":"cpu","Name":"cpu0","Dimension":"I/OWaitPercentage","Value":0.00,"NodeId":"algo-1","Timestamp":1682752560.004957}
+{"Type":"cpu","Name":"cpu1","Dimension":"CPUUtilization","Value":33.33,"NodeId":"algo-1","Timestamp":1682752560.004957}
+{"Type":"cpu","Name":"cpu1","Dimension":"I/OWaitPercentage","Value":0.00,"NodeId":"algo-1","Timestamp":1682752560.004957}
+{"Type":"cpu","Name":"cpu2","Dimension":"CPUUtilization","Value":45.83,"NodeId":"algo-1","Timestamp":1682752560.004957}
+{"Type":"cpu","Name":"cpu2","Dimension":"I/OWaitPercentage","Value":0.00,"NodeId":"algo-1","Timestamp":1682752560.004957}
+{"Type":"cpu","Name":"cpu3","Dimension":"CPUUtilization","Value":92.00,"NodeId":"algo-1","Timestamp":1682752560.004957}
+{"Type":"cpu","Name":"cpu3","Dimension":"I/OWaitPercentage","Value":2.00,"NodeId":"algo-1","Timestamp":1682752560.004957}
+{"Type":"i/o","Name":"IOPS","Dimension":"","Value":5062.00,"NodeId":"algo-1","Timestamp":1682752560.005038}
+{"Type":"i/o","Name":"ReadThroughputInBytesPerSecond","Dimension":"","Value":8987824.04,"NodeId":"algo-1","Timestamp":1682752560.005038}
+{"Type":"i/o","Name":"WriteThroughputInBytesPerSecond","Dimension":"","Value":1194956087.51,"NodeId":"algo-1","Timestamp":1682752560.005038}
+{"Type":"network","Name":"ReceiveBytesPerSecond","Dimension":"Algorithm","Value":0.00,"NodeId":"algo-1","Timestamp":1682752560.005233}
+{"Type":"network","Name":"TransmitBytesPerSecond","Dimension":"Algorithm","Value":0.00,"NodeId":"algo-1","Timestamp":1682752560.005233}
+{"Type":"network","Name":"ReceiveBytesPerSecond","Dimension":"Platform","Value":24034.87,"NodeId":"algo-1","Timestamp":1682752560.005233}
+{"Type":"network","Name":"TransmitBytesPerSecond","Dimension":"Platform","Value":517639.33,"NodeId":"algo-1","Timestamp":1682752560.005233}

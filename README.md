@@ -43,7 +43,8 @@ This is how my cleaned data folder looks now
 - Choose the default user profile. Choose "Create an IAM Role" for permissions associated with the User Profile. In the popup choose appropriate s3 buckets.
 ![plot](newrole.png) <br/>
 ![plot](s3bucket.png) <br/>
-- Note down the name of the newly created Role. In my case it started with AmazonSageMaker-ExecutionRole-xxxxxx 
+- Note down the name of the newly created Role. In my case it started with AmazonSageMaker-ExecutionRole-xxxxxx.
+- In IAM, add glue:CreateTable policy to the above  AmazonSageMaker-ExecutionRole-xxxxxx Role. For Quick SetUp I added the AWSGlueServiceRole Managed policy.
 
 #9)The creation of the new domain will take a few minutes.
 <Creation of the new domain takes about 5 minutes>
@@ -53,7 +54,7 @@ This is how my cleaned data folder looks now
 #11)Once the Sagemaker Studio opens, 
 - Go to File -> New Terminal
 - Execute the following on the terminal 
-- `aws s3 cp s3://awesome2023-xxxxx/python_notebook/AWSWomenInEngineering2023_V2.ipynb .`
+- `aws s3 cp s3://awesome2023-xxxxx/python_notebook/AWSWomenInEngineering2023_V3.ipynb .`
 
 #12) Double clicking the Jupyter Notebook will start the kernel. This process takes about 5 mins. <br/>
 In a nutshell here is what we will do in the Notebook.
@@ -71,12 +72,15 @@ In a nutshell here is what we will do in the Notebook.
      - `python setup.py bdist_wheel`
      - `pip install dist/sagemaker_migration_toolkit-0.0.1-py3-none-any.whl`
      - Go to IAM and find the IAM role for Sagemaker which will allow creating SageMaker Models, Endpoint Configurations, and Endpoints. It is best practice to create a role with the least priviledges needed. For quick start I used the Amazon managed Sagemaker execution role that I used earlier when I set up my Sagemaker domain which was of this kind of format `arn:aws:iam::<ACCOUNT>:role/service-role/AmazonSageMaker-ExecutionRole-XXXXXXX`
-     - Execute this command `sagemaker_migration-configure --module-name sagemaker_migration.configure` and follow steps to enter the arn of the above role when asked.
+     - Execute this command `sagemaker_migration-configure --module-name sagemaker_migration.configure` 
+     and follow steps to enter the arn of the above role when asked.
      - Go to testing/sklearn folder 
-     - Download the model.joblib from sagemaker notebook and upload it to your Cloud9 Console in testing/sklearn folder or download the model from your s3 bucket where you saved the model while executing the Jupyter Notebook in the steps above. I downloaded from the s3 bucket as follows `aws s3 cp s3://awesome2023-XXXXXXXX/model.joblib ./`
+     - Download the model from your s3 bucket where you saved the model while executing the Jupyter Notebook in the steps above. <br/>
+     I downloaded from the s3 bucket we have been using so far as follows `aws s3 cp s3://awesome2023-XXXXXXXX/model.joblib ./`
      - Inside the testing/sklearn folder , execute `python test.py` . This will deploy the sagemaker endpoint for sklearn.
      - Once the endpoint is deployed , go to the AWS Sagemaker console and go to Inference-> Endpoints  and take down the name of the deployed endpoint. 
-     - Copy the sed command from inside of DEPLOY_INSTRUCTIONS.md , replace the name of sagemaker endpoint and execute the script on the command prompt in cloud 9. `sed -i s@SAGEMAKER-ENDPOINT@xx-xx-xx-xxxx-xx-xx-xx-xx-xx@g localtest.sh`
+     - Open DEPLOY_INSTRUCTIONS.md and replace the name of sagemaker endpoint in it. Execute the script on the command prompt in cloud 9 as follows:<br/>
+    `sed -i s@SAGEMAKER-ENDPOINT@xx-xx-xx-xxxx-xx-xx-xx-xx-xx@g localtest.sh`
      - Execute the following to test `sh localtest.sh`
      - Check if you have got scaled responses in prediction_response.json
 
