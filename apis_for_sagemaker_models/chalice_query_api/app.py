@@ -21,7 +21,7 @@ def index():
     print(CLUSTERNO)
     # query variable with two environment variables and a constant
     query = f"""
-    SELECT * FROM clusters WHERE cluster ={CLUSTERNO} order by averagerating , numvotes asc limit 10;
+    SELECT * FROM clusters WHERE cluster ={CLUSTERNO} order by averagerating desc , numvotes desc limit 10;
     """
     response = client.start_query_execution(
           QueryString=query,
