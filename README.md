@@ -150,7 +150,7 @@ Post payload is
     }<br/>
    - create query_results folder in the S3 bucket that you have been using so far
    - Execute  `cd query-athena-boto3/`
-   - sed -i s@BUCKET_NAME@<your bucket name>@g app.py
+   - sed -i s@BUCKET_NAME@<replace with your bucket name>@g app.py
    - Execute `chalice deploy`
    - curl command for testing <br/>
   <code> curl -X POST https://xxxxxxx.execute-api.us-east-1.amazonaws.com/api \ <br/>
