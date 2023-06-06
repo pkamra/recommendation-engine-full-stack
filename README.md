@@ -1,7 +1,5 @@
 # recommendation-engine-full-stack
 
-
-
 ## Diagrammatic flow of our process
 ![plot](recommendation_flow.png)
 
