@@ -82,14 +82,12 @@ In a nutshell here is what we will do in the Notebook.
   - Execute the following to test `sh localtest.sh`
   - Check if you have got scaled responses in prediction_response.json
 
-#14) We will be saving the clustered final data for quick retrieval puposes, so lets go back to Glue and create the `default` database before continuing to execute further cells in the Jupyter notebook. 
+#14) We will be saving the clustered final data for quick retrieval puposes, so lets go back to AWS Glue console and create the `default` database before continuing to execute further cells in the Jupyter notebook. 
 
 
-#15) After all cells remaining are executed, let us create the API's using an open source tool called chalice which makes the creation of Lambda and API gateway very easy.
-- Lets open a brand new Cloud 9 environment 
+#15) After all remaining cells in the Jupyter notebook are executed, let us create the API's using an open source tool called chalice which makes the creation of Lambda and API gateway very easy.
 - Purpose of this API is to take in categories that you are interested in and then call the 2 sagemaker endpoints behind the scenes and return a cluster number
-
-#16) Go back to the root of the Cloud 9 Instance. I am at ~/environment root on my Cloud9 environment and I do the following:-
+- Go back to the root of the Cloud 9 Instance. I am at ~/environment root on my Cloud9 environment and I do the following:-
 - `pip install chalice`
 - `chalice new-project sagemaker-apigateway-lambda-chalice`
 - To see hidden files in Cloud9 IDE , click on the gear icon and Click on Show environment root and show hidden files
