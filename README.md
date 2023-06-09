@@ -64,8 +64,8 @@ In a nutshell here is what we will do in the Notebook.
 - when you are ready to deploy the custom sklearn scaling model to sagemaker, go to the next step.
 
 
-#13) Since the sklearn model is not a native sagemaker endpoint , but rather a  custom model being deployed in the sagemaker environment we will use the the sagemaker migration toolkit for deployment of the sklearn model as an endpoint in the Sagemaker environment. 
-  -  Open the Cloud9 environment , go to the folder sagemaker-migration-toolkit. Here are the high level steps. Detailed steps are mentioned in sagemaker-migration-toolkit/README.md
+#13) <strong>Since the sklearn model is not a native sagemaker endpoint , but rather a  custom model being deployed in the sagemaker environment we will use the the sagemaker migration toolkit for deployment of the sklearn model as an endpoint in the Sagemaker environment.</strong>
+  -  Open the Cloud9 environment , go to the folder `sagemaker-migration-toolkit`. Here are the high level steps. Detailed steps are mentioned in sagemaker-migration-toolkit/README.md
   - `pip install wheel`
   - `python setup.py bdist_wheel`
   - `pip install dist/sagemaker_migration_toolkit-0.0.1-py3-none-any.whl`
