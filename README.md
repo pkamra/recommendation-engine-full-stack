@@ -65,22 +65,22 @@ In a nutshell here is what we will do in the Notebook.
 
 
 #13) Since the sklearn model is not a native sagemaker endpoint , but rather a  custom model being deployed in the sagemaker environment we will use the the sagemaker migration toolkit for deployment of the sklearn model as an endpoint in the Sagemaker environment. 
--  Open the Cloud9 environment , go to the folder sagemaker-migration-toolkit. Here are the high level steps. Detailed steps are mentioned in sagemaker-migration-toolkit/README.md
-     - `pip install wheel`
-     - `python setup.py bdist_wheel`
-     - `pip install dist/sagemaker_migration_toolkit-0.0.1-py3-none-any.whl`
-     - Go to IAM and find the IAM role for Sagemaker which will allow creating SageMaker Models, Endpoint Configurations, and Endpoints. It is best practice to create a role with the least priviledges needed. For quick start I used the Amazon managed Sagemaker execution role that I used earlier when I set up my Sagemaker domain which was of this kind of format `arn:aws:iam::<ACCOUNT>:role/service-role/AmazonSageMaker-ExecutionRole-XXXXXXX`
-     - Execute this command `sagemaker_migration-configure --module-name sagemaker_migration.configure` 
-     and follow steps to enter the arn of the above role when asked.
-     - Go to testing/sklearn folder 
-     - Download the model from your s3 bucket where you saved the model while executing the Jupyter Notebook in the steps above. <br/>
-     I downloaded from the s3 bucket we have been using so far as follows `aws s3 cp s3://awesome2023-XXXXXXXX/model.joblib ./`
-     - Inside the testing/sklearn folder , execute `python test.py` . This will deploy the sagemaker endpoint for sklearn.
-     - Once the endpoint is deployed , go to the AWS Sagemaker console and go to Inference-> Endpoints  and take down the name of the deployed endpoint. 
-     - Open DEPLOY_INSTRUCTIONS.md and replace the name of sagemaker endpoint in it. Execute the script on the command prompt in cloud 9 as follows:<br/>
+  -  Open the Cloud9 environment , go to the folder sagemaker-migration-toolkit. Here are the high level steps. Detailed steps are mentioned in sagemaker-migration-toolkit/README.md
+  - `pip install wheel`
+  - `python setup.py bdist_wheel`
+  - `pip install dist/sagemaker_migration_toolkit-0.0.1-py3-none-any.whl`
+  - Go to IAM and find the IAM role for Sagemaker which will allow creating SageMaker Models, Endpoint Configurations, and Endpoints. It is best practice to create a role with the least priviledges needed. 
+  For quick start I used the Amazon managed Sagemaker execution role that I used earlier when I set up my Sagemaker domain which was of this kind of format `arn:aws:iam::<ACCOUNT>:role/service-role/AmazonSageMaker-ExecutionRole-XXXXXXX`
+  - Execute this command `sagemaker_migration-configure --module-name sagemaker_migration.configure` and follow steps to enter the arn of the above role when asked.
+  - Go to testing/sklearn folder 
+  - Download the model from your s3 bucket where you saved the model while executing the Jupyter Notebook in the steps above. <br/> 
+  I downloaded from the s3 bucket we have been using so far as follows `aws s3 cp s3://awesome2023-XXXXXXXX/model.joblib ./`
+  - Inside the testing/sklearn folder , execute `python test.py` . This will deploy the sagemaker endpoint for sklearn.
+  - Once the endpoint is deployed , go to the AWS Sagemaker console and go to Inference-> Endpoints  and take down the name of the deployed endpoint. 
+  - Open DEPLOY_INSTRUCTIONS.md and replace the name of sagemaker endpoint in it. Execute the script on the command prompt in cloud 9 as follows:<br/>
     `sed -i s@SAGEMAKER-ENDPOINT@xx-xx-xx-xxxx-xx-xx-xx-xx-xx@g localtest.sh`
-     - Execute the following to test `sh localtest.sh`
-     - Check if you have got scaled responses in prediction_response.json
+  - Execute the following to test `sh localtest.sh`
+  - Check if you have got scaled responses in prediction_response.json
 
 #14) We will be saving the clustered final data for quick retrieval puposes, so lets go back to Glue and create the `default` database before continuing to execute further cells in the Jupyter notebook. 
 
