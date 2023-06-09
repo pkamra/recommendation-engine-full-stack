@@ -95,8 +95,8 @@ In a nutshell here is what we will do in the Notebook.
 - Add requirements.txt and app.py contents to the root of the project from the `recommendation-engine-full-stack/apis_for_sagemaker_models/chalice_custom_scaling_kmeans_api` folder. 
 - Update ml model endpoint names in app.py
 - Execute `export AWS_DEFAULT_REGION=us-east-1`
-- Create a role Cloud9_LambdaExecutionRole with the right access policies. This role is added as the lambda execution role in config.json inside the .chalice folder
-- Finally this is how your config.json should look like <br/>
+- Create a role `Cloud9_LambdaExecutionRole` with the right access policies. This role is added as the lambda execution role in `config.json` inside the `.chalice` folder
+- Finally this is how your `config.json` should look like <br/>
 <code>
 {<br/>
     "version": "2.0",<br/>
@@ -112,7 +112,7 @@ In a nutshell here is what we will do in the Notebook.
   }<br/>
 </code>
 
-- In sagemaker-apigateway-lambda-chalice folder execute `chalice deploy`
+- In `sagemaker-apigateway-lambda-chalice` folder execute `chalice deploy`
 - For testing the deployed API do the following<br/>
 curl -X POST https://xxxxxx.execute-api.us-east-1.amazonaws.com/api -H 'Content-Type: application/json' -d @- <<BODY 
 { <br/>
