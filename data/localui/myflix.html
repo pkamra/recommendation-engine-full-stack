@@ -201,7 +201,7 @@
         // set the Content-Type header to application/json
         //this is for the clusters
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "https://j56udxkz5e.execute-api.us-east-1.amazonaws.com/api", true);
+        xhr.open("POST", "https://<abcdef>.execute-api.us-east-1.amazonaws.com/api", true);
         xhr.setRequestHeader("Content-Type", "application/json");
 
         // handle the response
@@ -212,7 +212,7 @@
                 console.log(response);
 
                 var xhr2 = new XMLHttpRequest();
-                xhr2.open("POST", "https://gseg9qtdjj.execute-api.us-east-1.amazonaws.com/api", true); //for the top recommendations
+                xhr2.open("POST", "https://<ghijklmn>.execute-api.us-east-1.amazonaws.com/api", true); //for the top recommendations
                 xhr2.setRequestHeader("Content-Type", "application/json");
                 xhr2.onreadystatechange = function() {
                   if (xhr2.readyState === 4 && xhr2.status === 200) {
